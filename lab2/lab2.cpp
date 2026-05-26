@@ -19,24 +19,25 @@
 #include <iostream>
 #include <vector>
 
-using namespace std;
+const std::string INPUT_FILE = "input.txt";
+const std::string OUTPUT_FILE = "output.txt";
 
 int main()
 {
-	ifstream fin("input.txt");
-	ofstream fout("output.txt");
+	std::ifstream fin(INPUT_FILE);
+	std::ofstream fout(OUTPUT_FILE);
 
 	long long N, C, P, T;
 	fin >> N >> C >> P >> T;
 
-	vector<long long> A(N);
+	std::vector<long long> A(N);
 	for (int i = 0; i < N; ++i)
 	{
 		fin >> A[i];
 	}
 
 	// префиксные суммы людей на этажах 1..i
-	vector<long long> pref(N + 1, 0);
+	std::vector<long long> pref(N + 1, 0);
 	for (int i = 0; i < N; ++i)
 	{
 		pref[i + 1] = pref[i] + A[i];
@@ -74,6 +75,6 @@ int main()
 		}
 	}
 
-	fout << ans << endl;
+	fout << ans << std::endl;
 	return 0;
 }
