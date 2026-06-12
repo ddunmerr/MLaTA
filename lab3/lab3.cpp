@@ -28,8 +28,18 @@ const std::string OUTPUT_FILE = "output.txt";
 int main()
 {
 	std::ifstream fin(INPUT_FILE);
+	if (!fin)
+	{
+		std::cout << "couldnt open input file";
+		return 1;
+	}
 	std::ofstream fout(OUTPUT_FILE);
-
+	if (!fout)
+	{
+		std::cout << "couldnt open output file";
+		return 1;
+	}
+	
 	long long w, h, n;
 	fin >> w >> h >> n;
 
