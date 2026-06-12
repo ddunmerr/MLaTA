@@ -64,7 +64,11 @@ int main()
 		return 1;
 	}
 	
-	fin >> n;
+	if (!(fin >> n))
+	{
+		std::cout << "couldnt read file";
+		return 1;
+	}
 
 	std::vector<int> vect(n);
 	for (int i = 0; i < n; i++)
