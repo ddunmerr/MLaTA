@@ -46,17 +46,28 @@ int main()
 		return 1;
 	}
 	int n;
-	fin >> n;
-
+	if (!(fin >> n))
+	{
+		std::cout << "couldnt read" << std::endl;
+		return 1;
+	}
 	double u1, v1, u2, v2;
-	fin >> u1 >> v1 >> u2 >> v2;
+	if (!(fin >> u1 >> v1 >> u2 >> v2))
+	{
+		std::cout << "couldnt read" << std::endl;
+		return 1;
+	}
 
 	std::vector<double> x(n), y(n);
 	for (int i = 0; i < n; i++)
 	{
-		fin >> x[i] >> y[i];
+		if (!(fin >> x[i] >> y[i]))
+		{
+			std::cout << "couldnt read" << std::endl;
+			return 1;
+		}
 	}
-
+	
 	double Vx = u2 - u1;
 	double Vy = v2 - v1;
 
