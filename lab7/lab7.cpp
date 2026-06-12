@@ -58,13 +58,20 @@ int main()
 	}
 
 	int N, M;
-	fin >> N >> M;
-
+	if (!(fin >> N >> M))
+	{
+		std::cout << "couldnt read file";
+		return 1;
+	}
 	std::vector<std::vector<int>> graph(N + 1);
 	for (int i = 0; i < M; i++)
 	{
 		int a, b;
-		fin >> a >> b;
+		if (!(fin >> a >> b))
+		{
+			std::cout << "couldnt read file";
+			return 1;
+		}
 		graph[a].push_back(b);
 		graph[b].push_back(a);
 	}
