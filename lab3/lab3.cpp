@@ -41,8 +41,11 @@ int main()
 	}
 	
 	long long w, h, n;
-	fin >> w >> h >> n;
-
+	if (!(fin >> w >> h >> n))
+	{
+		std::cout << "couldnt read file";
+		return 1;
+	}
 	long long lo = MIN_SIDE;
 	long long hi = MAX_SIDE;
 	while (lo < hi)
