@@ -37,8 +37,12 @@ int main()
 	}
 	
 	int X, Y;
-	fin >> X >> Y;
-
+	if (!(fin >> X >> Y))
+	{
+		std::cout << "couldnt read file" << std::endl;
+		return 1;
+	}
+	
 	std::vector<std::vector<int>> ways(X + Y + 2, std::vector<int>(Y + 1, 0));
 
 	ways[0][0] = 1;
