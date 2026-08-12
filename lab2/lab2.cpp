@@ -37,10 +37,14 @@ int main()
 		std::cout << "couldnt open output file";
 		return 1;
 	}
-	
-	int N, A, B;
-	fin >> N >> A >> B;
 
+	int N, A, B;
+	if (!(fin >> N >> A >> B))
+	{
+		std::cout << "couldnt read file";
+		return 1;
+	}
+	
 	std::vector<bool> win(N + 1, false);
 	for (int i = 1; i <= N; i++)
 	{
