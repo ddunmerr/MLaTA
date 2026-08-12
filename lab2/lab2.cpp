@@ -44,22 +44,15 @@ int main()
 		std::cout << "couldnt read file";
 		return 1;
 	}
-	
+
 	std::vector<bool> win(N + 1, false);
 	for (int i = 1; i <= N; i++)
 	{
+		win[i] = false;
 		if (i >= A && !win[i - A])
-		{
 			win[i] = true;
-		}
-		else if (i >= B && !win[i - B])
-		{
+		if (i >= B && !win[i - B])
 			win[i] = true;
-		}
-		else
-		{
-			win[i] = false;
-		}
 	}
 
 	if (win[N])
