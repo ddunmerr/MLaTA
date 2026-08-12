@@ -17,49 +17,56 @@
 
 #include <fstream>
 #include <vector>
+#include <iostream>
 
 const std::string INPUT_FILE = "input.txt";
 const std::string OUTPUT_FILE = "output.txt";
 
 int main()
 {
-	std::ifstream fin(INPUT_FILE);
-	if (!fin)
-	{
-		std::cout << "couldnt open input file";
-		return 1;
-	}
-	std::ofstream fout(OUTPUT_FILE);
-	if (!fout)
-	{
-		std::cout << "couldnt open output file";
-		return 1;
-	}
-	
-	int X, Y;
-	if (!(fin >> X >> Y))
-	{
-		std::cout << "couldnt read file" << std::endl;
-		return 1;
-	}
-	
-	std::vector<std::vector<int>> ways(X + Y + 2, std::vector<int>(Y + 1, 0));
+    std::ifstream fin(INPUT_FILE);
+    if (!fin)
+    {
+        std::cout << "couldnt open input file";
+        return 1;
+    }
+    std::ofstream fout(OUTPUT_FILE);
+    if (!fout)
+    {
+        std::cout << "couldnt open output file";
+        return 1;
+    }
 
-	ways[0][0] = 1;
+    int X, Y;
+    if (!(fin >> X >> Y))
+    {
+        std::cout << "couldnt read file" << std::endl;
+        return 1;
+    }
 
-	for (int y = 1; y <= Y; y++)
-	{
-		for (int x = 0; x <= X + Y; x++)
-		{
-			if (x > 0)
-			{
-				ways[x][y] += ways[x - 1][y - 1];
-			}
-			ways[x][y] += ways[x + 1][y - 1];
-		}
-	}
+    std::vector<std::vector<long long>> dp(Y + 1, std::vector<long long>(X + Y + 2, 0));
 
-	fout << ways[X][Y] << std::endl;
+    dp[0][X] = 1;
 
-	return 0;
+    for (int step = 1; step <= Y; step++)
+    {
+        // Переходы для всех позиций, кроме 0 (цели)
+        for (int pos = 1; pos <= X + Y; pos++)
+        {
+            // Шаг к цели (уменьшаем расстояние)
+            if (pos - 1 >= 0)
+            {
+                dp[step][pos - 1] += dp[step - 1][pos];
+            }
+            // Шаг от цели (увеличиваем расстояние)
+            if (pos + 1 <= X + Y)
+            {
+                dp[step][pos + 1] += dp[step - 1][pos];
+            }
+        }
+    }
+
+    fout << dp[Y][0] << std::endl;
+
+    return 0;
 }
